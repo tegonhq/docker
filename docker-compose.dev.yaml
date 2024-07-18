@@ -67,6 +67,9 @@ services:
       PORT: ${TRIGGER_PORT}
       REMIX_APP_PORT: ${TRIGGER_PORT}
       RUNTIME_PLATFORM: "docker-compose"
+      DEPLOY_REGISTRY_HOST: ${DEPLOY_REGISTRY_HOST}
+      DEPLOY_REGISTRY_NAMESPACE: ${DEPLOY_REGISTRY_NAMESPACE}
+
     ports:
       - 3030:3030
     networks:

@@ -10,6 +10,8 @@
 
 # Load environment variables from .env file
 export $(grep -v '^#' .env | xargs)
+export $(envsubst < .env | grep -v '^#' | xargs)
+
 DB_CONTAINER_NAME="tegon-db"
 ID="clyofc7dn0000o33e4sup590l"
 ID1="clyofc7dn0000o33e5sup590l"
