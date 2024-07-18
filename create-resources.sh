@@ -12,4 +12,4 @@ log_error_and_exit() {
 # To run this server container must be running
 # Incase you are running server in local you can directly call `yarn script/createUserWorkspaceTeam` in server folder
 echo "Running createUserWorkspaceTeam script."
-docker exec -i $SERVER_CONTAINER_NAME yarn script/createUserWorkspaceTeam || log_error_and_exit "Failed to run createUserWorkspaceTeam script."
+docker exec -i $SERVER_CONTAINER_NAME node scripts/createUserWorkspaceTeam || log_error_and_exit "Failed to run createUserWorkspaceTeam script."

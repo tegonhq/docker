@@ -3,6 +3,7 @@ version: "3.8"
 services:
   db:
     image: "tegonhq/tegon-postgres:${VERSION}"
+    container_name: tegon-db
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -17,6 +18,7 @@ services:
 
   supertokens:
     image: registry.supertokens.io/supertokens/supertokens-postgresql:latest
+    container_name: tegon-supertokens
     depends_on:
       - db
     environment:
@@ -32,6 +34,7 @@ services:
 
   redis:
     image: redis:alpine3.19
+    container_name: tegon-redis
     networks:
       - tegon
     ports:
@@ -133,6 +136,7 @@ services:
 
   triggerapp:
     image: ghcr.io/triggerdotdev/trigger.dev:v3
+    container_name: tegon-triggerapp
     restart: unless-stopped
     environment:
       V3_ENABLED: ${V3_ENABLED}
@@ -154,6 +158,7 @@ services:
 
   docker-provider:
     image: ghcr.io/triggerdotdev/provider/docker:v3
+    container_name: tegon-docker-provider
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -172,6 +177,7 @@ services:
 
   coordinator:
     image: ghcr.io/triggerdotdev/coordinator:v3
+    container_name: tegon-coordinator
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
