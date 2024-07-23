@@ -59,7 +59,6 @@ services:
       - FRONTEND_HOST=${FRONTEND_HOST}
       - PUBLIC_FRONTEND_HOST=${PUBLIC_FRONTEND_HOST}
       - BACKEND_HOST=${BACKEND_HOST}
-      - PORT=${BACKEND_PORT}
       - SUPERTOKEN_CONNECTION_URI=${SUPERTOKEN_CONNECTION_URI}
       - MASTER_TOKEN=${MASTER_TOKEN}
       - REPLICATION_DATABASE_URL=${REPLICATION_DATABASE_URL}
@@ -83,7 +82,7 @@ services:
     ports:
       - 3001:3001
     volumes:
-      - ./certs:/app/certs
+      - ./certs:/app/apps/server/certs
 
   webapp:
     image: "tegonhq/tegon-webapp:${VERSION}"

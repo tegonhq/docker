@@ -6,8 +6,9 @@
 # 3. You have workspace, team created
 
 # Load environment variables from .env file
-export $(grep -v '^#' .env | xargs)
-export $(envsubst < .env | grep -v '^#' | xargs)
+set -a
+source .env
+set +a
 
 DB_CONTAINER_NAME="tegon-db"
 SERVER_CONTAINER_NAME="tegon-server"
