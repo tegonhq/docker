@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   db:
-    image: "tegonhq/tegon-postgres:${VERSION}"
+    image: "tegonhq/tegon-postgres:0.1.0-alpha"
     container_name: tegon-db
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
@@ -79,9 +79,11 @@ services:
       - GCP_SERVICE_ACCOUNT_FILE=${GCP_SERVICE_ACCOUNT_FILE}
       - PUBLIC_ATTACHMENT_URL=${PUBLIC_ATTACHMENT_URL}
       - COHERE_API_KEY=${COHERE_API_KEY}
-      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - LOCAL_MODEL=${LOCAL_MODEL}
     ports:
       - 3001:3001
+    volumes:
+      - ./certs:/app/certs
 
   webapp:
     image: "tegonhq/tegon-webapp:${VERSION}"
@@ -173,6 +175,17 @@ services:
       HTTP_SERVER_PORT: ${HTTP_SERVER_PORT}
       SECURE_CONNECTION: "false"
 
+  ollama:
+    image: ollama/ollama:0.2.5
+    container_name: tegon-ollama
+    volumes:
+      - ollama-data:/root/.ollama
+    ports:
+      - 11434:11434
+    networks:
+      - tegon
+    restart: unless-stopped
+
 networks:
   app_network:
     driver: bridge
@@ -181,3 +194,4 @@ networks:
 volumes:
   postgres-data:
   typesense-data:
+  ollama-data:
