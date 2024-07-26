@@ -45,7 +45,7 @@ if [[ "$USER_EXISTS" -gt 0 ]]; then
     exit 0
 else
     echo "User row does not exist. Running createUserWorkspaceTeam script."
-    docker exec -i $SERVER_CONTAINER_NAME node scripts/createUserWorkspaceTeam || log_error_and_exit "Failed to run createUserWorkspaceTeam script."
+    docker exec -i $SERVER_CONTAINER_NAME node apps/server/scripts/createUserWorkspaceTeam || log_error_and_exit "Failed to run createUserWorkspaceTeam script."
 fi
 
 echo "Successfully started."

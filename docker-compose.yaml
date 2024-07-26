@@ -79,6 +79,7 @@ services:
       - PUBLIC_ATTACHMENT_URL=${PUBLIC_ATTACHMENT_URL}
       - COHERE_API_KEY=${COHERE_API_KEY}
       - LOCAL_MODEL=${LOCAL_MODEL}
+      - OLLAMA_HOST=${OLLAMA_HOST}
     ports:
       - 3001:3001
     volumes:
