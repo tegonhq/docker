@@ -17,7 +17,7 @@ services:
     restart: unless-stopped
 
   supertokens:
-    image: registry.supertokens.io/supertokens/supertokens-postgresql:latest
+    image: registry.supertokens.io/supertokens/supertokens-postgresql:9.0.2
     container_name: tegon-supertokens
     depends_on:
       - db
@@ -131,6 +131,9 @@ services:
       PORT: ${TRIGGER_PORT}
       REMIX_APP_PORT: ${TRIGGER_PORT}
       NODE_ENV: ${NODE_ENV}
+      APP_ENV: ${NODE_ENV}
+      APP_ORIGIN: ${TRIGGER_API_URL}
+      DEV_OTEL_EXPORTER_OTLP_ENDPOINT: ${TRIGGER_PROTOCOL:-http}://${TRIGGER_DOMAIN:-localhost:3030}/otel
       RUNTIME_PLATFORM: "docker-compose"
     ports:
       - 3030:3030
@@ -149,11 +152,12 @@ services:
     depends_on:
       - triggerapp
     environment:
-      PLATFORM_HOST: triggerapp
+      PLATFORM_HOST: tegon-triggerapp
+      OTEL_EXPORTER_OTLP_ENDPOINT: ${TRIGGER_PROTOCOL:-http}://${TRIGGER_DOMAIN:-localhost:3030}/otel
       PLATFORM_WS_PORT: ${TRIGGER_PORT}
-      HTTP_SERVER_PORT: ${HTTP_SERVER_PORT}
-      COORDINATOR_HOST: ${COORDINATOR_HOST}
-      COORDINATOR_PORT: ${COORDINATOR_PORT}
+      HTTP_SERVER_PORT: 9020
+      COORDINATOR_HOST: 127.0.0.1
+      COORDINATOR_PORT: 9020
       SECURE_CONNECTION: "false"
 
   coordinator:
@@ -170,9 +174,10 @@ services:
     ports:
       - 9020:9020
     environment:
-      PLATFORM_HOST: triggerapp
+      PLATFORM_HOST: tegon-triggerapp
+      OTEL_EXPORTER_OTLP_ENDPOINT: ${TRIGGER_PROTOCOL:-http}://${TRIGGER_DOMAIN:-localhost:3030}/otel
       PLATFORM_WS_PORT: ${TRIGGER_PORT}
-      HTTP_SERVER_PORT: ${HTTP_SERVER_PORT}
+      HTTP_SERVER_PORT: 9020
       SECURE_CONNECTION: "false"
 
   ollama:

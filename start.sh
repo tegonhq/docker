@@ -25,7 +25,7 @@ log_error_and_exit() {
 
 # Start docker compose
 echo "Starting Docker Compose with $COMPOSE_FILE..."
-docker-compose --env-file .env -f $COMPOSE_FILE up -d || log_error_and_exit "Failed to start Docker Compose."
+docker compose --env-file .env -f $COMPOSE_FILE up -d || log_error_and_exit "Failed to start Docker Compose."
 
 # Wait for containers to be up and running
 echo "Waiting for containers to start..."
