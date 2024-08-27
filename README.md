@@ -22,7 +22,7 @@ cd docker
 3. Run the start script and follow the prompts
 
 ```bash
-./start.sh # hint: you can append --dev incase you want to run server and webapp locally while contributing
+./start.sh
 ```
 
 ### Stopping the Docker containers
@@ -30,7 +30,7 @@ cd docker
 1. Run the stop script
 
 ```bash
-./stop.sh # hint: you can append --dev incase you want to stop the dev docker compose
+./stop.sh
 ```
 
 ### Getting started with using Tegon
