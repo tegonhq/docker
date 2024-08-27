@@ -81,7 +81,7 @@ services:
       - LOCAL_MODEL=${LOCAL_MODEL}
       - OLLAMA_HOST=${OLLAMA_HOST}
     ports:
-      - 3001:3001
+      - 8001:3001
     volumes:
       - ./certs:/app/apps/server/certs
 
@@ -98,6 +98,7 @@ services:
       - NEXT_PUBLIC_BASE_HOST=${NEXT_PUBLIC_BASE_HOST}
       - NEXT_PUBLIC_VERSION=${VERSION}
       - NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_BACKEND_URL}
+      - NEXT_PUBLIC_BACKEND_HOST=${NEXT_PUBLIC_BACKEND_HOST}
       - NEXT_PUBLIC_SENTRY_DSN=${NEXT_PUBLIC_SENTRY_DSN}
     ports:
       - 8000:3000
@@ -119,7 +120,7 @@ services:
     container_name: tegon-triggerapp
     restart: unless-stopped
     environment:
-      V3_ENABLED: ${V3_ENABLED}
+      V3_ENABLED: true
       DATABASE_URL: ${TRIGGER_DATABASE_URL}
       DIRECT_URL: ${TRIGGER_DATABASE_URL}
       SESSION_SECRET: ${TRIGGER_TOKEN}
