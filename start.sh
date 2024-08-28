@@ -35,18 +35,5 @@ sleep 10
 echo "Running init-trigger.sh script..."
 ./init-trigger.sh || log_error_and_exit "Failed to run init-trigger.sh."
 
-
-# Check if the user row exists in the PostgreSQL database
-echo "Checking if user row exists in the PostgreSQL database..."
-USER_EXISTS=$(docker exec -i $DB_CONTAINER_NAME psql -U $POSTGRES_USER -d $POSTGRES_DB -t -c "SELECT COUNT(*) FROM $DB_SCHEMA.\"User\";" | tr -d '[:space:]')
-
-if [[ "$USER_EXISTS" -gt 0 ]]; then
-    echo "User row exists in the database. Exiting script."
-    exit 0
-else
-    echo "User row does not exist. Running createUserWorkspaceTeam script."
-    docker exec -i $SERVER_CONTAINER_NAME node apps/server/scripts/createUserWorkspaceTeam || log_error_and_exit "Failed to run createUserWorkspaceTeam script."
-fi
-
 echo "Successfully started."
 exit 0
