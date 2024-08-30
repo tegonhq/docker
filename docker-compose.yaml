@@ -93,7 +93,6 @@ services:
     networks:
       - tegon
     environment:
-      - BACKEND_URL=${BACKEND_URL}
       - NEXT_PUBLIC_BASE_HOST=${NEXT_PUBLIC_BASE_HOST}
       - NEXT_PUBLIC_VERSION=${VERSION}
       - NEXT_PUBLIC_BACKEND_HOST=${NEXT_PUBLIC_BACKEND_HOST}
@@ -105,7 +104,7 @@ services:
 
   typesense:
     image: typesense/typesense:0.26.0.rc61
-    container_name: typesense
+    container_name: tegon-typesense
     ports:
       - 8108:8108
     volumes:
@@ -136,6 +135,8 @@ services:
       APP_ORIGIN: ${TRIGGER_API_URL}
       DEV_OTEL_EXPORTER_OTLP_ENDPOINT: ${TRIGGER_PROTOCOL:-http}://${TRIGGER_DOMAIN:-localhost:3030}/otel
       RUNTIME_PLATFORM: "docker-compose"
+      DEPLOY_REGISTRY_HOST: docker.io
+      DEPLOY_REGISTRY_NAMESPACE: tegonhq
     ports:
       - 3030:3030
     networks:
