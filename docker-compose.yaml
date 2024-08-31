@@ -183,7 +183,7 @@ services:
       SECURE_CONNECTION: "false"
 
   ollama:
-    image: ollama/ollama:0.2.5
+    image: ollama/ollama:0.3.1
     container_name: tegon-ollama
     volumes:
       - ollama-data:/root/.ollama
