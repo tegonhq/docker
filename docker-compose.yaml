@@ -93,6 +93,7 @@ services:
     networks:
       - tegon
     environment:
+      - BACKEND_URL=${BACKEND_URL}
       - NEXT_PUBLIC_BASE_HOST=${NEXT_PUBLIC_BASE_HOST}
       - NEXT_PUBLIC_VERSION=${VERSION}
       - NEXT_PUBLIC_BACKEND_HOST=${NEXT_PUBLIC_BACKEND_HOST}
