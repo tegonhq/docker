@@ -81,7 +81,7 @@ services:
       - OLLAMA_HOST=${OLLAMA_HOST}
       - DOCKER_TOKEN=${DOCKER_TOKEN}
     ports:
-      # - 5555:5555
+      - 5555:5555
       - 8001:3001
     volumes:
       - ./certs:/app/apps/server/certs
