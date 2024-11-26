@@ -17,7 +17,7 @@ services:
     restart: unless-stopped
 
   supertokens:
-    image: registry.supertokens.io/supertokens/supertokens-postgresql:9.0.2
+    image: registry.supertokens.io/supertokens/supertokens-postgresql:9.3.0
     container_name: tegon-supertokens
     depends_on:
       - db
