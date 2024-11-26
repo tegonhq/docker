@@ -3,3 +3,5 @@
 
 .env.local
 .env.prod
+
+docker-compose.prod.yaml
