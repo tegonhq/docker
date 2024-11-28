@@ -9,7 +9,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
     ports:
-      - 5432:5432
+      - 5432:${DB_PORT}
     networks:
       - tegon
     volumes:
@@ -38,7 +38,7 @@ services:
     networks:
       - tegon
     ports:
-      - 6379:6379
+      - 6379:${REDIS_PORT}
     restart: unless-stopped
 
   server:
@@ -81,8 +81,8 @@ services:
       - OLLAMA_HOST=${OLLAMA_HOST}
       - DOCKER_TOKEN=${DOCKER_TOKEN}
     ports:
-      - 5555:5555
-      - 8001:3001
+      # - 5555:5555
+      - ${BACKEND_HOST_PORT}:${WEBAPP_PORT}
     volumes:
       - ./certs:/app/apps/server/certs
 
@@ -105,7 +105,7 @@ services:
       - NEXT_PUBLIC_AI_HOST=${NEXT_PUBLIC_AI_HOST}
       - NEXT_PUBLIC_NODE_ENV=${NODE_ENV}
     ports:
-      - 8000:3000
+      - ${WEBAPP_HOST_PORT}:3000
 
   typesense:
     image: typesense/typesense:0.26.0.rc61
