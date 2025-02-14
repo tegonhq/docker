@@ -13,7 +13,7 @@ services:
     networks:
       - tegon
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      - postgres-data_3:/var/lib/postgresql/data
     restart: unless-stopped
 
   supertokens:
@@ -49,6 +49,7 @@ services:
       - supertokens
       - redis
       - typesense
+      - triggerapp
     restart: unless-stopped
     networks:
       - tegon
@@ -82,7 +83,9 @@ services:
       - COHERE_API_KEY=${COHERE_API_KEY}
       - LOCAL_MODEL=${LOCAL_MODEL}
       - OLLAMA_HOST=${OLLAMA_HOST}
-      - DOCKER_TOKEN=${DOCKER_TOKEN}
+      - TRIGGER_ACCESS_TOKEN={TRIGGER_ACCESS_TOKEN}
+      - TRIGGER_SECRET_KEY={TRIGGER_SECRET_KEY}
+      - TRIGGER_API_URL={TRIGGER_API_URL}
     ports:
       - 5555:5555
       - 8001:3001
@@ -123,7 +126,7 @@ services:
     command: --data-dir /data --api-key=${TYPESENSE_API_KEY} --enable-cors
 
   triggerapp:
-    image: ghcr.io/triggerdotdev/trigger.dev:v3.0.0-beta.56
+    image: ghcr.io/triggerdotdev/trigger.dev:v3.3.13
     container_name: tegon-triggerapp
     restart: unless-stopped
     environment:
@@ -152,7 +155,7 @@ services:
       - tegon
 
   docker-provider:
-    image: ghcr.io/triggerdotdev/provider/docker:v3.0.0-beta.56
+    image: ghcr.io/triggerdotdev/provider/docker:v3.3.13
     container_name: tegon-docker-provider
     restart: unless-stopped
     volumes:
@@ -172,7 +175,7 @@ services:
       SECURE_CONNECTION: "false"
 
   coordinator:
-    image: ghcr.io/triggerdotdev/coordinator:v3.0.0-beta.56
+    image: ghcr.io/triggerdotdev/coordinator:v3.3.13
     container_name: tegon-coordinator
     restart: unless-stopped
     volumes:
@@ -208,6 +211,6 @@ networks:
   tegon: {}
 
 volumes:
-  postgres-data:
+  postgres-data_3:
   typesense-data:
   ollama-data:
