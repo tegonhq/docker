@@ -22,7 +22,7 @@ cd docker
 3. Run the start script and follow the prompts
 
 ```bash
-./start.sh
+docker compose up
 ```
 
 ### Stopping the Docker containers
@@ -30,17 +30,33 @@ cd docker
 1. Run the stop script
 
 ```bash
-./stop.sh
+docker compose down
 ```
 
-### Getting started with using Tegon
+### Deploying Tasks
 
-You should now be able to access the Tegon dashboard at [http://localhost:8000](http://localhost:8000/).
+To deploy and run tasks (powered by Trigger.dev), follow these steps:
 
-To create an account
+1. Create a Docker Hub account at [hub.docker.com](https://hub.docker.com/) and login locally:
 
 ```bash
-./create-resources.sh
+docker login
 ```
 
-Our main docs are at [docs.tegon.ai](https://docs.tegon.ai/).
+2. Clone the main Tegon repository and set up environment variables:
+
+```bash
+git clone https://github.com/tegonhq/tegon.git
+cd tegon
+```
+
+3. Configure your environment variables in `.env`. The following variables are essential for tasks:
+
+   - `BASE_HOST`: Your instance URL
+   - `DATABASE_URL`: Your database connection string
+   - `TRIGGER_API_KEY`: Your Trigger.dev API key
+   - `TRIGGER_API_URL`: Your Trigger.dev API URL
+
+   You can find the complete list of required variables in `trigger.config.ts`.
+
+4. After successful deployment, navigate to your Tegon instance's Settings -> Actions to install and configure the necessary actions for your workflows.
